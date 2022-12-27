@@ -32,4 +32,18 @@ class PostController extends Controller
                 ->make(true);
         }
     }
+    
+    
+    
+   
+    
+        public function getAutocompleteData(Request $request){
+            if($request->has('term')){
+                return Post::where('title','like','%'.$request->input('term').'%')->get();
+            }
+        }
+    
+       
+    
+    
 }

@@ -5,6 +5,7 @@
     <title>Laravel 8 Form Example Tutorial</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.js"></script>
 </head>
 <body>
   <div class="container mt-4">
@@ -33,5 +34,33 @@
     </div>
   </div>
 </div>  
+<script>
+  $(function () {
+           $('#product_id').autocomplete({
+               source:function(request,response){
+                
+                   $.getJSON('?term='+request.term,function(data){
+                        var array = $.map(data,function(row){
+                            return {
+                                value:row.id,
+                                label:row.title,
+                                name:row.description,
+                            }
+                        })
+
+                        response($.ui.autocomplete.filter(array,request.term));
+                   })
+               },
+               minLength:1,
+               delay:500,
+               select:function(event,ui){
+                   $('#name').val(ui.item.name)
+                   $('#description').val(ui.item.description)
+               }
+           })
+})
+</script>
 </body>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"/>
 </html>

@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 Route::get('add-blog-post-form', [PostController::class, 'index']);
 Route::post('store-form', [PostController::class, 'store']);
+Route::get('auto',[PostController::class,'getAutocompleteData']); 
 
 Route::get('posts', [PostController::class, 'index']);
 Route::get('posts/list', [PostController::class, 'getPosts'])->name('posts.list');
